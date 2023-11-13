@@ -1,6 +1,5 @@
 using Quartz;
 using Serilog;
-using Serilog.Context;
 
 namespace QuartzSerilogPlayground;
 
@@ -16,8 +15,6 @@ public class HelloJob : IJob
     
     public Task Execute(IJobExecutionContext jobContext)
     {
-        using var _ = LogContext.PushProperty("JobFireInstanceId", jobContext.FireInstanceId);
-        
         logger.Information($"HelloJob executing");
         
         return helloService.DoStuff(jobContext.CancellationToken);
