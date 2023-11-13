@@ -27,8 +27,6 @@ static async Task ConfigureQuartz(IHost host)
     var schedulerFactory = host.Services.GetRequiredService<ISchedulerFactory>();
     
     var scheduler = await schedulerFactory.GetScheduler();
-    
-    scheduler.ListenerManager.AddJobListener(new MyJobListener());
 
     var job = JobBuilder.Create<HelloJob>()
         .WithIdentity("myJob", "group1")
