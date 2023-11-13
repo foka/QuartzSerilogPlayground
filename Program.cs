@@ -47,7 +47,8 @@ static void ConfigureSerilog(IHost host)
 {
     var loggerConfiguration = new LoggerConfiguration()
         .WriteTo.Console(outputTemplate:
-            "[{Timestamp:HH:mm:ss} {Level}] {Message}{NewLine}")
+            "[{Timestamp:HH:mm:ss} {Level} {JobFireInstanceId}] {Message}{NewLine}")
+        .Enrich.FromLogContext()
     ;
 
     Log.Logger = loggerConfiguration.CreateLogger();
